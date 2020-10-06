@@ -1,8 +1,6 @@
 package Easy;
 
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.TreeMap;
 
 public class LC1337 {
     /*

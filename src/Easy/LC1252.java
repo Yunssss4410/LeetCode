@@ -1,7 +1,5 @@
 package Easy;
 
-import java.util.Arrays;
-
 public class LC1252 {
     public static void main(String[] args) {
         int res=new Solution().oddCells(2,3,new int[][]{{0,1},{1,1}});

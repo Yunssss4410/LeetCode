@@ -1,7 +1,5 @@
 package Easy;
 
-import java.util.Arrays;
-
 public class LC35 {
     public static void main(String[] args) {
         int num=new Solution().searchInsert(new int[]{1,3,5,6},2);

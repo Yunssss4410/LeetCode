@@ -1,9 +1,6 @@
 package Easy;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Stack;
 
 public class LC496 {

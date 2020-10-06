@@ -1,21 +1,20 @@
 package Extension;
 
+import java.util.List;
+
+//N×树
 public class Node {
-    public boolean val;
-    public boolean isLeaf;
-    public Node topLeft;
-    public Node topRight;
-    public Node bottomLeft;
-    public Node bottomRight;
+    public int val;
+    public List<Node> children;
 
     public Node() {}
 
-    public Node(boolean _val,boolean _isLeaf,Node _topLeft,Node _topRight,Node _bottomLeft,Node _bottomRight) {
+    public Node(int _val) {
         val = _val;
-        isLeaf = _isLeaf;
-        topLeft = _topLeft;
-        topRight = _topRight;
-        bottomLeft = _bottomLeft;
-        bottomRight = _bottomRight;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
     }
 }
