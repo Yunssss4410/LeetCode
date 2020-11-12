@@ -2,6 +2,7 @@ package Middle;
 
 import Extension.TreeNode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,38 +12,51 @@ public class LC95 {
      */
     class Solution {
         public List<TreeNode> generateTrees(int n) {
-            if (n == 0) {
-                return new LinkedList<TreeNode>();
-            }
-            return generateTrees(1, n);
-        }
-
-        public List<TreeNode> generateTrees(int start, int end) {
-            List<TreeNode> allTrees = new LinkedList<TreeNode>();
-            if (start > end) {
-                allTrees.add(null);
-                return allTrees;
-            }
-
-            // 枚举可行根节点
-            for (int i = start; i <= end; i++) {
-                // 获得所有可行的左子树集合
-                List<TreeNode> leftTrees = generateTrees(start, i - 1);
-
-                // 获得所有可行的右子树集合
-                List<TreeNode> rightTrees = generateTrees(i + 1, end);
-
-                // 从左子树集合中选出一棵左子树，从右子树集合中选出一棵右子树，拼接到根节点上
-                for (TreeNode left : leftTrees) {
-                    for (TreeNode right : rightTrees) {
-                        TreeNode currTree = new TreeNode(i);
-                        currTree.left = left;
-                        currTree.right = right;
-                        allTrees.add(currTree);
+            List<TreeNode> pre = new ArrayList<>();
+            if (n == 0) return pre;
+            pre.add(null);
+            //每增加一个数字，循环一次
+            for (int i = 1; i < n + 1; i++) {
+                List<TreeNode> cur = new ArrayList<>();
+                //遍历之前的所有解
+                for (TreeNode node : pre) {
+                    //第一个接，插入到根节点
+                    TreeNode insert = new TreeNode(i);
+                    insert.left = node;
+                    cur.add(insert);
+                    //之后的解都是往右边插
+                    for (int j = 0; j < n + 1; j++) {
+                        TreeNode root_copy = treeCopy(node); //复制当前的树
+                        TreeNode right = root_copy; //找到要插入右孩子的位置
+                        int k = 0;
+                        for (; k < j; k++) {
+                            if (right == null) break;
+                            right = right.right;
+                        }
+                        //到达 null 提前结束
+                        if (right == null) break;
+                        TreeNode rightTree = right.right;
+                        insert = new TreeNode(i);
+                        right.right = insert;
+                        insert.left = rightTree;
+                        cur.add(root_copy);
                     }
                 }
+                pre = cur;
             }
-            return allTrees;
+            return pre;
         }
+
+        //树复制
+        private TreeNode treeCopy(TreeNode root) {
+            if (root == null) {
+                return root;
+            }
+            TreeNode newRoot = new TreeNode(root.val);
+            newRoot.left = treeCopy(root.left);
+            newRoot.right = treeCopy(root.right);
+            return newRoot;
+        }
+
     }
 }

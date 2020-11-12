@@ -12,6 +12,7 @@ public class LC14 {
             for (String str : strs) {
                 minfloor=Math.min(str.length(),minfloor);
             }
+
             StringBuilder builder=new StringBuilder();
             int floor=0;
             while (floor < minfloor)

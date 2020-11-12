@@ -5,6 +5,7 @@ public class LC7 {
     7. 整数反转
      */
     class Solution {
+
         public int reverse(int x) {
             long res=0;
             while(x!=0)

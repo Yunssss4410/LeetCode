@@ -9,23 +9,28 @@ public class LC530 {
     530. 二叉搜索树的最小绝对差
      */
     class Solution {
-        ArrayList<Integer> list;
+        //差值的最小值
+        int min = Integer.MAX_VALUE;
+        //前一个节点
+        TreeNode prev;
+
         public int getMinimumDifference(TreeNode root) {
-            list=new ArrayList<>();
-            dfs(root);
-            list.sort((o1, o2) -> o1-o2);
-            int res=Integer.MAX_VALUE;
-            for (int i = 1; i < list.size(); i++) {
-                res=Math.min(res,Math.abs(list.get(i)-list.get(i-1)));
-            }
-            return res;
+            inorder(root);
+            return min;
         }
 
-        public void dfs(TreeNode root) {
-            if (root==null) return;
-            list.add(root.val);
-            dfs(root.left);
-            dfs(root.right);
+        public void inorder(TreeNode root) {
+            //边界条件判断
+            if (root == null)
+                return;
+            //左子树
+            inorder(root.left);
+            //对当前节点的操作
+            if (prev != null)
+                min = Math.min(min, root.val - prev.val);
+            prev = root;
+            //右子树
+            inorder(root.right);
         }
     }
 }
